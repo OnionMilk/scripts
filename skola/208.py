@@ -1,6 +1,6 @@
 from matplotlib import pyplot as plt
 
-#----------------------START Afferent branch----------------------
+#------------------------------Input--------------------------------------------------
 
 #Importerar ifrån listan
 text_file = open("alternativ.txt", "r")
@@ -17,8 +17,7 @@ klass5 = []
 #Alla vikter i float format
 float_vikter = []
 
-#----------------------END Afferent branch----------------------
-#----------------------START Transform branch----------------------
+#------------------------------Beräkning--------------------------------------------------
 
 #Konvertering till float
 for line in raw_vikter:
@@ -71,8 +70,7 @@ half = len(sorterade_vikter)/2
 half = int(half)
 median = sorterade_vikter[half]
 
-#----------------------END Transform branch----------------------
-#----------------------START Efferent branch----------------------
+#------------------------------Output--------------------------------------------------
 
 #Alla Klasser (ordnade)
 print("\n\nBagage som är lättare än 5 Kg: \n")
@@ -151,5 +149,3 @@ plt.title("Frekvens av olika viktklasser")
 plt.legend()
 plt.show()
 
-
-#----------------------END Efferent branch----------------------
