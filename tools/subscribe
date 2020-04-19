@@ -1,0 +1,30 @@
+#!/bin/bash
+
+! echo "$1" | grep "youtube" >/dev/null &&
+    notify-send "Thats not youtube, you stupid fuck" && exit
+
+RSSFILE="$HOME/.config/newsboat/youtube/urls"
+
+echo "works 1"
+
+curl -s "$1" > /tmp/youtube_site_for_scraping_channelid || notify-send "You can't use the internet without access to it, silly."
+
+echo "works 2"
+
+new_url=$(echo "https://www.youtube.com/feeds/videos.xml?channel_id=")$(grep channelId /tmp/youtube_site_for_scraping_channelid | cut -c 1-70 | grep content\=\" | cut -c 43- | cut -c -24)
+
+echo "works 3"
+
+channelname=$(cat /tmp/youtube_site_for_scraping_channelid | tr ":" "\n" | grep -A 1 "ownerChannelName" | grep -v ownerChannelName | cut -d "\"" -f2 | sed 's/\\//' )
+
+echo "works 4"
+
+result=$(echo "$new_url" "$channelid" '"~'"$channelname"\" )
+
+echo "works 5" $result
+
+if [ -n "$2" ]; then
+    echo $result
+else
+    echo $result >> "$RSSFILE" && notify-send "Subscribed to $channelname"
+fi

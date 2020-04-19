@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#[ -n "$1" ] && exit
+
+file=$(echo "$*" | sed 's/^-[a-z]*\s//')
+options=$(echo "$*" | sed 's/\/.*$//')
+
+echo $file
+
+case "$file" in
+    *.docx)	libreoffice --convert-to pdf "$file" ;;
+    *.pptx)	libreoffice --convert-to pdf "$file" ;;
+    *.md)	pandoc "$file" --pdf-engine=xelatex -o "$(echo "$file" | sed 's/\.md$//')".pdf ;;
+    *.xopp)	xournalpp $file --create-pdf $(echo "$file" | sed 's/\.xopp$//').pdf ;;
+esac
+
+

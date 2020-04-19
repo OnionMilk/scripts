@@ -1,0 +1,4 @@
+keycode 1 = Caps_Lock
+keycode 58 = Escape
+keycode 159 = F70
+string F70 = "ä"

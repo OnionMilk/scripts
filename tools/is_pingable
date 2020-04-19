@@ -1,0 +1,4 @@
+#!/bin/bash
+#checks if given ip is pingable, if yes returns 1 if no returns 0.
+
+ping -c 1 $1 | grep "received" | awk '{print $4}'

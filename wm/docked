@@ -1,0 +1,45 @@
+#!/bin/bash
+
+primary=LVDS1
+secondary=VGA1
+side=left
+
+pkill polybar && sleep 1
+
+echo "works 1"
+
+# Not docked
+if [ "$(cat /sys/devices/platform/dock.2/docked)" = 0 ]; then
+    xrandr --output "$primary" --auto --scale 1.0x1.0
+    init_screen -n
+    setbg
+    remaps
+    pgrep -x dunst >/dev/null && killall dunst && setsid -f dunst & # Restart dunst to ensure proper location on screen
+    bspc wm -r
+    echo "works 2"
+    exit
+fi
+
+# Docked
+if [ "$(cat /sys/devices/platform/dock.2/docked)" = 1 ]; then
+    xrandr --output "$primary" --auto --scale 1.0x1.0 --output "$secondary" --"$side"-of "$primary" --auto --scale 1.0x1.0
+    init_screen -d && echo "init screen"
+    setbg
+    remaps
+    pgrep -x dunst >/dev/null && killall dunst && setsid -f dunst & # Restart dunst to ensure proper location on screen
+    bspc wm -r
+    #pgrep sleep-now || sleep-now &
+    echo "works 3"
+    exit
+fi
+
+#loading of dt's bar
+#polybar --reload mainbar-VGA1 2> >(grep -v "warn")
+
+
+#[ $(is_pingable "$msi") -eq 1 ] && sshfs simon@"$msi":/ ~/dock/msi -o ServerAliveInterval=15 && echo "msi mounted"
+
+#sudo mount /dev/sdb4 ~/dock/sdb4
+#sudo mount /dev/sdb5 ~/dock/sdb5
+#sudo mount /dev/sdb6 ~/dock/sdb6
+

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+chosen=$(grep -v "#" ~/.config/unicode | dmenu -i -l 20 -fn Monospace-18)
+
+echo "$chosen" | sed 's/ .*//' | tr -d '\n' | xclip -selection clipboard

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+id="38:18:4C:BE:29:08"
+is_connected="$(bluetoothctl info $id | grep 'Connected:' | cut -d " " -f2)"
+audio_works="$(pulsemixer --list-sinks | grep "WH-1000XM3" | tr "\n" " " | wc -l)"
+
+if [ "$1" = "-c" ] ; then
+    if [ "$is_connected" = "yes" ]; then
+	echo "WH-1000MX3" && exit
+    fi
+
+    if [ "$is_connected" = "no" ]; then
+	echo "Speakers" && exit
+    fi
+fi
+
+if [ "$is_connected" = "no" ] ; then
+    notify-send "Attempting connection..."
+    bluetoothctl connect "$id" || ( notify-send "Failed to connect" && exit  )
+    notify-send "Headphones connected";
+#    [ -n "$audio_works" ] && notify-send "audio works (probably)";
+fi
+
+if [ "$is_connected" = "yes" ]; then
+    notify-send "Attempting disconnection..."
+    bluetoothctl disconnect "$id" || ( notify-send "Failed to disconnect" && exit )
+    notify-send "Headphones disconnected"
+fi

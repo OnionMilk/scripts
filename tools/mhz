@@ -1,0 +1,2 @@
+#!/bin/sh
+lscpu | awk '/CPU MHz/ {print $3}'

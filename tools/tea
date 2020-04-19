@@ -1,0 +1,5 @@
+#!/bin/bash
+
+notify-send "timer started" &&
+sleep 180 &&
+notify-send "tea's ready"

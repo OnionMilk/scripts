@@ -1,0 +1,5 @@
+!#/bin/bash
+
+chosenstate=$(du -a /tmp/bspwmscript/ | fzf )
+
+bspwm wm -l $chosenstate

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# This script is currently not in use
+
+killall -q polybar
+
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+
+for m in $(polybar -m | cut -d ":" -f1 | tr "\n" " ")
+do
+    echo "$m" 1>&2
+    MONITOR=$m polybar mainbar-VGA1 2>"$ERROR"/polybar &
+done
+
+#Hardcoded for now, weird bash looping issue, above code doesn't work properly
+
+#MONITOR="LVDS1"
+#polybar mainbar
+
+#MONITOR="VGA1"
+#polybar mainbar
+
+echo "Bars launched"
+

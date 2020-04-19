@@ -1,0 +1,19 @@
+#!/bin/bash
+
+roundup() {
+    echo "$(($(echo $1 | sed 's/\.[0-9]*//') + 1))"
+}
+
+rounddown() {
+    echo $1 | sed 's/\.[0-9]*//'
+}
+
+#justround() {
+    #figure out how to round automatically
+#}
+
+case $1 in
+    -u) roundup $2 ;;
+    -d) rounddown $2 ;;
+#    *) justround $1 ;;
+esac

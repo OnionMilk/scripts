@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo $1
+echo $2
+
+new() {
+    printf "New\n"
+    mkdir ~/skola/"$1"/"$2"
+    cd ~/skola/"$1"/"$2"
+}
+
+if [ -n $2 ]; then
+    new $1 $2
+else
+    cd ~/skola/"$1"
+    lf
+fi

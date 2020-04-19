@@ -1,0 +1,32 @@
+#!/bin/bash
+#Handles all the ssh business to do with the msi "ex-laptop"
+
+error() {
+    echo "msi not mounted"
+    exit 1;
+}
+
+mountfs() {
+    [ -e /tmp/sshfs_status ] && grep "msi:" /tmp/sshfs_status && echo "msi already mounted"
+    sshfs simon@$(echo $msi):/ ~/dock/msi -o ServerAliveInterval=15
+    echo "msi: ~/dock/msi" >> /tmp/sshfs_status
+}
+
+umountfs() {
+    if [ -e /tmp/sshfs_status ]; then
+	[ -z $(grep "msi:" /tmp/sshfs_status) ] && error;
+    fi
+
+    fusermount3 -u ~/dock/msi
+}
+
+copy() {
+    scp simon@"$msi":$2 $3
+}
+
+case $1 in
+    -m) mountfs ;;
+    -u) umountfs ;;
+    -c) copy $2 $3 ;;
+    *) ssh simon@"$msi" -p 65000 ;;
+esac

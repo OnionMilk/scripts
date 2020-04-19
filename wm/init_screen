@@ -1,0 +1,29 @@
+#!/bin/bash
+# Works with max. two screens
+# Assumes all monitors are configured with xrandr already
+
+#notify-send "1"
+
+primary="LVDS1"
+secondary="VGA1"
+
+#killall -q polybar
+
+#existing_screens=$(bspc query -M --names | tr "\n" " ")
+#existing_desktops=$(bspc query -D --names)
+
+# Docked mode:
+if [ "$1" = "-d" ]; then
+    bspc monitor $secondary -d 1 2 3 4 5 6 7 8 9 10
+    bspc monitor $primary -d 1 2 3 4 5 6 7 8 9 10
+    MONITOR="$secondary" polybar -r default 2>/dev/null &
+    MONITOR="$primary" polybar -r default 2>/dev/null &
+fi
+
+# Not docked:
+if [ "$1" = "-n" ]; then
+    bspc monitor $primary -d 1 2 3 4 5 6 7 8 9 10
+    MONITOR="$primary" polybar -r mainbar 2>/dev/null &
+    [ $(bspc query -M | wc -l) = 2 ] && bspc monitor $secondary -r;
+    #xrandr --delmonitor $primary
+fi

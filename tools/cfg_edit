@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#Second argument is what to change, first argument is the name of the file in question. Similar strukture as grep
+
+raw_content=$(cat $1)
+line_count=$(wc -l $1)
+word_count=$(wc -c $1)
+
+find_line() {
+
+}
+
+#Option -l will expect a line number pointing to the element to be changed
+
+case $2 in
+    -l) find_line ;;
+    -w) find_word ;;
+esac
+

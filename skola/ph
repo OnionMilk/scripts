@@ -1,0 +1,22 @@
+#!/bin/bash
+
+new() {
+    printf "New\n"
+    mkdir ~/skola/PH4/$1
+    cd ~/skola/PH4/$1
+}
+
+
+no_arg() {
+    cd ~/skola/PH4
+    lf
+}
+
+if [ -n $1 ];
+then
+    case $1 in
+    	-n) new $2 ;;
+	*) no_arg ;;
+    esac
+fi
+

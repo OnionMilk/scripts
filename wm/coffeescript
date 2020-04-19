@@ -1,0 +1,7 @@
+#!/bin/bash
+
+[ $1 = "-n" ] && echo 1 >>"$TEMP_DIR"/coffescript.tmp
+
+[ $1 = "-g" ] && echo $(cat "$TEMP_DIR"/coffeescript.tmp | wc -l)
+
+[ $1 = "-r" ] && rm "$TEMP_DIR"/coffescript.tmp

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "9Hbzd86G" | xclip
+surf 192.168.178.1 &
+exit

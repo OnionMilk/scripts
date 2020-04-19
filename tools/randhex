@@ -1,0 +1,3 @@
+#!/bin/bash
+#generates one random hexadecimal number
+shuf -i 0-15 -n1 | sed 's/10/a/;s/11/b/;s/12/c/;s/13/d/;s/14/e/;s/15/f/'

@@ -1,0 +1,5 @@
+#!/bin/bash
+#a script that takes stderr and somehow pipes it to notify-send
+
+read $input
+echo $input | wc -m

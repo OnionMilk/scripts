@@ -1,0 +1,10 @@
+#!/bin/bash
+
+statefile="/tmp/bspwmscript/noborder"
+
+[ ! -e "$statefile" ] && cat "0" > "$statefile" && notify-send "Statefile created"
+
+[ $(cat "$statefile") = 1 ] && notify-send "Noborder" #bspc config window_gap 0
+
+[ $(cat "$statefile") = 0 ] && notify-send "Yesborder" #bspc config window_gap 10
+

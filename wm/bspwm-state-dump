@@ -1,0 +1,3 @@
+!#/bin/bash
+
+bspc wm -d > /tmp/bspwmscript/bspwm-state."$(date +%b%d_%R)"
