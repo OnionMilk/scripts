@@ -15,7 +15,7 @@ if [ -z "$extracthere" ]; then
 	mkdir -p "$directory" &&
 	cd "$directory" || exit 2
 else
-	archive="$(readlink -f "$(echo "$*" | cut -d' ' -f2)")"
+	archive="$(echo "$*" | cut -d' ' -f2)" || echo "failed 1"
 fi
 
 [ "$archive" = "" ] && printf "Give archive to extract as argument.\\n" && exit 1

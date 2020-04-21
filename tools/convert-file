@@ -13,5 +13,3 @@ case "$file" in
     *.md)	pandoc "$file" --pdf-engine=xelatex -o "$(echo "$file" | sed 's/\.md$//')".pdf ;;
     *.xopp)	xournalpp $file --create-pdf $(echo "$file" | sed 's/\.xopp$//').pdf ;;
 esac
-
-
